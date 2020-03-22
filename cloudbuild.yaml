@@ -1,0 +1,16 @@
+substitutions:
+  _BUCKET: "your-google-cloud-storage-bucket"
+  _REGION: "your-gcp-region"
+
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    dir: covid_georedirect
+    args:
+      - functions
+      - deploy
+      - covid_georedirect
+      - --stage-bucket=${_BUCKET}
+      - --trigger-http
+      - --entry-point=covid_georedirect
+      - --region=${_REGION}
+      - --runtime=nodejs8
